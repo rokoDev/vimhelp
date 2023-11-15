@@ -42,6 +42,25 @@
 - to past after the cursor position: `p`
 - to past before the cursor position: `P`
 
+## find and replace(at first you should switch to COMMAND mode: `Esc`)
+General form:`[range]s/{pattern}/{string}/[flags] [count]`
+  The command searches each line in `[range]` for a `{pattern}`, and replaces it with a `{string}`. `[count]` is a positive integer that multiplies the command.
+  If no `[range]` and `[count]` are given, only the pattern found in the current line is replaced. The current line is the line where the cursor is placed.
+  By default search is case sensitive. To ignore case, use `i` flag.
+
+Examples:
+- replace first occurrence of `foo` in the current line with `bar`: `s/foo/bar/`
+- replace all occurrences of `foo` in the current line with `bar`: `s/foo/bar/g`
+- replace all occurrences of `foo` in the entire file with `bar`: `%s/foo/bar/g`
+- replace all occurrences of `foo`, `Foo`, `fOO`, etc. in the entire file with `bar`: `%s/foo/bar/gi`
+
+If we need to search for or replace with a string that contains special character(e.g. `/`) then we should use back slash as escape character(`\`).
+Example:
+- replace all occurrences of `path/to/foo` in the entire file with `fixed/path/to/foo`: `%s/path\/to\/foo/fixed\/path\/to\/foo/g`
+
+The same as above can be achieved by using any other non-alphanumeric single-byte character except as a delimiter instead of slash `/`:
+- replace all occurrences of `path/to/foo` in the entire file with `fixed/path/to/foo`: `%s|path/to/foo|fixed/path/to/foo|g`
+
 ## quit(at first you should switch to COMMAND mode: `Esc`)
 - to quit (short for `:quit`): -------------------------------------------------------------- `:q`
 - to quit without saving (short for `:quit!`): .............................................. `:q!`
